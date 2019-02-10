@@ -59,7 +59,7 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c car
 
 	echo "cardtest2.c:" >> unittestresults.out
 	gcc -o cardtest2 dominion.c rngs.c cardtest2.c $(CFLAGS)
-	./cardtest1 >> unittestresults.out
+	./cardtest2 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 
 	echo "cardtest3.c:" >> unittestresults.out
@@ -69,7 +69,7 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c car
 
 	echo "cardtest4.c:" >> unittestresults.out
 	gcc -o cardtest4 dominion.c rngs.c cardtest4.c $(CFLAGS)
-	./cardtest1 >> unittestresults.out
+	./cardtest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 
 

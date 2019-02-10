@@ -33,8 +33,8 @@ int main(int argc, char **argv) {
   state.hand[thisPlayer][0] = adventurer;
 
 	printf("Card Test 2: %s\n", TESTCARD);
-	memcpy(&testState, &G, sizeof(struct gameState));
-  cardEffect(adventurer, choice1, choice2, choice3, &testState, handpos);
+	memcpy(&testState, &state, sizeof(struct gameState));
+  cardEffect(adventurer, choice1, choice2, choice3, &testState, handpos, &bonus);
 
   //Testing
 	printf("Card Test 2A: Receive at least 2 Coins. Coin count = %d, minimum expected = %d\n", testState.coins, state.coins + 2);
@@ -61,6 +61,6 @@ int main(int argc, char **argv) {
   int piles = (sum == 12);
   printf("Card Test 2D: No State Change for Victory Card Piles and Kingdom Card Piles = %d\n", piles);
 
-	printf("\n >>>>> Card Test 2 Complete - %s <<<<<\n", TESTCARD);
+	printf("\n >>>>> Card Test 2 Complete - %s <<<<<\n\n", TESTCARD);
   return 0;
 }

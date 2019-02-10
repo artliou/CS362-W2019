@@ -30,13 +30,13 @@ int main(int argc, char **argv) {
   initializeGame(numPlayers, k, seed, &state);
   state.hand[thisPlayer][0] = village;
 	printf("Card Test 3: %s\n", TESTCARD);
-	memcpy(&testState, &G, sizeof(struct gameState));
-  cardEffect(village, choice1, choice2, choice3, &testState, handpos);
+	memcpy(&testState, &state, sizeof(struct gameState));
+  cardEffect(village, choice1, choice2, choice3, &testState, handpos, &bonus);
 
   //Testing
 	printf("Card Test 3A: +1 Card. hand count = %d, expected = %d\n", testState.handCount[thisPlayer], state.handCount[thisPlayer] + 1);
 
-	printf("Card Test 3B: +2 Actions. action count = %d, expected = %d\n", testState.numActions[thisPlayer], state.numActions[thisPlayer] + 2);
+	printf("Card Test 3B: +2 Actions. action count = %d, expected = %d\n", testState.numActions, state.numActions + 2);
 
 	printf("Card Test 3C: -1 Deck. deck count = %d, expected = %d\n", testState.deckCount[thisPlayer], state.deckCount[thisPlayer] - 1);
 
@@ -60,6 +60,6 @@ int main(int argc, char **argv) {
   int piles = (sum == 12);
   printf("Card Test 3F: No State Change for Victory Card Piles and Kingdom Card Piles = %d\n", piles);
 
-	printf("\n >>>>> Card Test 3 Complete - %s <<<<<\n", TESTCARD);
+	printf("\n >>>>> Card Test 3 Complete - %s <<<<<\n\n", TESTCARD);
   return 0;
 }

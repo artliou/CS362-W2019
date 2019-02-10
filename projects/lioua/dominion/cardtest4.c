@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
   int numPlayers = 2;
   int thisPlayer = 0, otherPlayer = 1;
   int seed = 1000;
-  int handpos = 0;
+  int handpos = 0, bonus = 0;
   struct gameState state, testState;
   int k[10] = {
     adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall
@@ -31,9 +31,9 @@ int main(int argc, char **argv) {
   state.hand[thisPlayer][0] = remodel;
   state.hand[thisPlayer][1] = copper;
 	printf("Card Test 4: %s\n", TESTCARD);
-	memcpy(&testState, &G, sizeof(struct gameState));
+	memcpy(&testState, &state, sizeof(struct gameState));
   //Trash a copper for a Village
-  cardEffect(remodel, 1, village, 0, &testState, handpos);
+  cardEffect(remodel, 1, village, 0, &testState, handpos, &bonus);
 
   //Testing
 	printf("Card Test 4A: Hand Count -2. hand count = %d, expected = %d\n", testState.handCount[thisPlayer], state.handCount[thisPlayer] - 2);
@@ -60,6 +60,6 @@ int main(int argc, char **argv) {
   int piles = (sum == 12);
   printf("Card Test 4D: No State Change for Victory Card Piles and other Kingdom Card Piles = %d\n", piles);
 
-	printf("\n >>>>> Card Test 4 Complete - %s <<<<<\n", TESTCARD);
+	printf("\n >>>>> Card Test 4 Complete - %s <<<<<\n\n", TESTCARD);
   return 0;
 }

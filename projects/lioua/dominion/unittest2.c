@@ -22,13 +22,12 @@ int main (int argc, char** argv) {
   
   //Test Case 1 - Invalid Number of Players
   int a = initializeGame(1, k, 2, &state);
-
-  if (a == 0) {
+  printf("Unit Test 2: Test???%d\n", a);  
+  if (a == -1) {
     printf("Unit Test 2: Test Complete - SUCCESS - Number of Players Cannot be 1.\n");  
- 
     return 0;
   }
-  if (a == 1) {
+  if (a != -1) {
     printf("Unit Test 2: Test Complete - FAIL - Invalid Number of Players.\n");    
     return 1;
   }

@@ -26,13 +26,11 @@ int main (int argc, char** argv) {
   s = isGameOver(&state);
   // assert(s == 1);
   printf("isGameOver Test 1 - Province\n");
-  if (s == 0) {
-    printf("Unit Test 4: Province - Test Complete - SUCCESS.\n");  
-    // return 0;
-  }
   if (s == 1) {
+    printf("Unit Test 4: Province - Test Complete - SUCCESS.\n");  
+  }
+  if (s == 0) {
     printf("Unit Test 4: Province - Test Complete - FAIL.\n");    
-    // return 1;
   }
 
   // Set up End Game Scenario 0
@@ -45,15 +43,15 @@ int main (int argc, char** argv) {
 
   printf("isGameOver Test 1 - 3 Empty Stacks\n");
   // assert(s == 1);
-  if (st == 0) {
+  if (st == 1) {
     printf("Unit Test 4: 3 Stacks - Test Complete - SUCCESS.\n");
-    if (s == 0) {
+    if (s == 1) {
       return 0;
     } else { //First Test Failed
       return 1;
     }
   }
-  if (st == 1) {
+  if (st == 0) {
     printf("Unit Test 4: 3 Stacks - Test Complete - FAIL.\n");    
     return 1;
   }
