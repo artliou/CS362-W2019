@@ -22,7 +22,7 @@ int main (int argc, char** argv) {
   
   //Test Case 1 - Invalid Number of Players
   int a = initializeGame(1, k, 2, &state);
-  printf("Unit Test 2: Test???%d\n", a);  
+ 
   if (a == -1) {
     printf("Unit Test 2: Test Complete - SUCCESS - Number of Players Cannot be 1.\n");  
     return 0;
