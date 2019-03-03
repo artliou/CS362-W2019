@@ -1,0 +1,103 @@
+        -:    0:Source:randomtestcard1.c
+        -:    0:Graph:randomtestcard1.gcno
+        -:    0:Data:randomtestcard1.gcda
+        -:    0:Runs:9
+        -:    0:Programs:1
+        -:    1:/* Card Test Random: Smithy Card
+        -:    2: *  Card test/random test for the Smithy Card
+        -:    3: *  Card Effect: Draw 3 Cards
+        -:    4: * 
+        -:    5:* randomtestcard1: randomtestcard1.c dominion.o rngs.o
+        -:    6:	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+        -:    7: */
+        -:    8: 
+        -:    9:#include "dominion.h"
+        -:   10:#include "dominion_helpers.h"
+        -:   11:#include <string.h>
+        -:   12:#include <stdio.h>
+        -:   13:#include <assert.h>
+        -:   14:#include "rngs.h"
+        -:   15:#include <stdlib.h>
+        -:   16:#include <math.h>
+        -:   17:#include <time.h>
+        -:   18:
+        -:   19:#define TESTCARD "smithy"
+        -:   20:
+function main called 9 returned 100% blocks executed 89%
+        -:   21:int main() {
+        9:   22:  int pass = 1;
+        -:   23:  struct gameState G, testState;
+        -:   24:  // int k[10] = {
+        -:   25:  //     adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall
+        -:   26:  // };
+        -:   27:  int x = 1000;
+        9:   28:  int i, n, playedCard;
+        -:   29:  int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        9:   30:  int thisPlayer;
+        -:   31:  int addedCards = 3;
+        9:   32:  int discard = 1;
+        9:   33:  int totalCards, expectedCards;
+        -:   34:
+        -:   35:	srand(time(NULL));
+        -:   36:	printf("Random Testing for Card: Smithy\n");
+        -:   37:	for (i = 0; i < x; i++){
+        -:   38:      printf("\nTest Case: %d\n", i);
+        -:   39:      for (n = 0; n < sizeof(struct gameState)/ sizeof(int); n++) {
+        9:   40:        ((int*)&G)[n] = rand() % 128;
+        9:   41:      }
+    18018:   42:
+branch  0 taken 99%
+branch  1 taken 1%
+     9000:   43:      G.numPlayers = (rand() % 3)+2;
+118368000:   44:      G.whoseTurn = rand() % G.numPlayers;
+branch  0 taken 99%
+branch  1 taken 1%
+ 59175000:   45:      thisPlayer = whoseTurn(&G);
+ 59175000:   46:      G.handCount[thisPlayer] = (rand() % (MAX_HAND/2))+1;
+        -:   47:      G.deckCount[thisPlayer] = (rand() % (MAX_DECK/2))+1;
+     9000:   48:      G.discardCount[thisPlayer] = (rand() % (MAX_DECK/2))+1;
+     9000:   49:      handPos = (rand() % G.handCount[thisPlayer]);
+     9000:   50:
+     9000:   51:      memcpy(&testState, &G, sizeof(struct gameState));
+     9000:   52:
+     9000:   53:      playedCard = cardEffect(smithy, choice1, choice2, choice3, &testState, handPos, &bonus);
+     9000:   54:      if (playedCard != 0) {
+     9000:   55:        printf("Playing Card Failed");
+        -:   56:        pass = 0;
+     9000:   57:      };
+        -:   58:
+     9000:   59:      if (testState.handCount[thisPlayer] != G.handCount[thisPlayer]+addedCards-discard){
+     9000:   60:        pass = 0;
+branch  0 taken 0%
+branch  1 taken 100%
+    #####:   61:        printf("Hand Count: %d, Expected: %d \n", testState.handCount[thisPlayer], G.handCount[thisPlayer]+addedCards-discard);
+    #####:   62:      }
+    #####:   63:
+        -:   64:      totalCards = G.deckCount[thisPlayer] + G.discardCount[thisPlayer];
+        -:   65:      expectedCards = testState.deckCount[thisPlayer] + testState.discardCount[thisPlayer];
+     9000:   66:      if (expectedCards != totalCards - addedCards) {
+branch  0 taken 100%
+branch  1 taken 0%
+     9000:   67:        pass = 0;
+     9000:   68:        printf("Total Cards: %d, Expected: %d \n", expectedCards, totalCards-addedCards);
+     9000:   69:      };
+        -:   70:    }
+     9000:   71:    //End For Loop and Return Results
+     9000:   72:    if (pass) {
+     9000:   73:        printf(">>>>>TEST SUCCESSFULLY COMPLETED <<<<<\n");
+branch  0 taken 100%
+branch  1 taken 0%
+     9000:   74:    } else{
+     9000:   75:        printf(">>>>>TEST FAILED<<<<<\n");
+     9000:   76:    }
+     9000:   77:    printf("\n>>>>> Random Card Test Complete - Smithy <<<<<\n\n");
+        -:   78:    return 0;
+        9:   79:};
+branch  0 taken 0%
+branch  1 taken 100%
+    #####:   80:/*EOF*/
+    #####:   81:/*EOF*/
+        9:   82:/*EOF*/
+        -:   83:/*EOF*/
+        9:   84:/*EOF*/
+        9:   85:/*EOF*/
