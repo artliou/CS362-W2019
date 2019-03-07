@@ -684,8 +684,8 @@ int adventurerRefactor(int drawntreasure, struct gameState *state, int currentPl
 int smithyRefactor(int currentPlayer, struct gameState *state, int handPos)
 {
   int i = 0;
-  //for (i = 0; i < 3; i++)
-  for (i = 0; i < 2; i++)
+  for (i = 0; i < 3; i++)
+  // for (i = 0; i < 2; i++)
   {
     drawCard(currentPlayer, state);
   }
@@ -700,8 +700,8 @@ int smithyRefactor(int currentPlayer, struct gameState *state, int handPos)
 int countcil_roomRefactor(int currentPlayer, struct gameState *state, int handPos)
 {
   int i = 0;
-  //for (i = 0; i < 4; i++)
-  for (i = 0; i < 6; i++)
+  for (i = 0; i < 4; i++)
+  // for (i = 0; i < 6; i++)
   {
     drawCard(currentPlayer, state);
   }
@@ -783,7 +783,7 @@ int remodelRefactor(int currentPlayer, struct gameState *state, int handPos, int
   gainCard(choice2, state, 0, currentPlayer);
 
   //discard card from hand
-  //discardCard(handPos, currentPlayer, state, 0);
+  discardCard(handPos, currentPlayer, state, 0);
 
   //discard trashed card
   for (i = 0; i < state->handCount[currentPlayer]; i++)

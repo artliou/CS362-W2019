@@ -1,0 +1,105 @@
+        -:    0:Source:randomtestcard2.c
+        -:    0:Graph:randomtestcard2.gcno
+        -:    0:Data:randomtestcard2.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:/* Card Test Random: Villager Card
+        -:    2: *  Card test/random test for the Villager Card
+        -:    3: *  Card Effect: Draw 1 Card, +2 Action
+        -:    4: * 
+        -:    5:* randomtestcard2: randomtestcard2.c dominion.o rngs.o
+        -:    6:	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+        -:    7: */
+        -:    8: 
+        -:    9:#include "dominion.h"
+        -:   10:#include "dominion_helpers.h"
+        -:   11:#include <string.h>
+        -:   12:#include <stdio.h>
+        -:   13:#include <assert.h>
+        -:   14:#include "rngs.h"
+        -:   15:#include <stdlib.h>
+        -:   16:#include <math.h>
+        -:   17:#include <time.h>
+        -:   18:
+        -:   19:#define TESTCARD "village"
+        -:   20:
+function main called 2 returned 100% blocks executed 76%
+        -:   21:int main() {
+        2:   22:  int pass = 1;
+        -:   23:  struct gameState G, testState;
+        -:   24:  // int k[10] = {
+        -:   25:  //     adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall
+        -:   26:  // };
+        2:   27:  int x = 1000;
+        -:   28:  int i, n, playedCard;
+        2:   29:  int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        -:   30:  int thisPlayer;
+        2:   31:  int addedCards = 1;
+        2:   32:  int addedActions = 2;
+        2:   33:  int discard = 1;
+        -:   34:  int totalCards, expectedCards;
+        -:   35:
+        2:   36:	srand(time(NULL));
+        2:   37:	printf("Random Testing for Card: Village\n");
+     4004:   38:	for (i = 0; i < x; i++){
+branch  0 taken 99%
+branch  1 taken 1%
+     2000:   39:      printf("\nTest Case: %d\n", i);
+ 26304000:   40:      for (n = 0; n < sizeof(struct gameState)/ sizeof(int); n++) {
+branch  0 taken 99%
+branch  1 taken 1%
+ 13150000:   41:        ((int*)&G)[n] = rand() % 128;
+ 13150000:   42:      }
+        -:   43:
+     2000:   44:      G.numPlayers = (rand() % 3)+2;
+     2000:   45:      G.whoseTurn = rand() % G.numPlayers;
+     2000:   46:      thisPlayer = whoseTurn(&G);
+     2000:   47:      G.handCount[thisPlayer] = (rand() % (MAX_HAND/2))+1;
+     2000:   48:      G.deckCount[thisPlayer] = (rand() % (MAX_DECK/2))+1;
+     2000:   49:      G.discardCount[thisPlayer] = (rand() % (MAX_DECK/2))+1;
+     2000:   50:      handPos = (rand() % G.handCount[thisPlayer]);
+        -:   51:
+     2000:   52:      memcpy(&testState, &G, sizeof(struct gameState));
+        -:   53:
+     2000:   54:      playedCard = cardEffect(village, choice1, choice2, choice3, &testState, handPos, &bonus);
+     2000:   55:      if (playedCard != 0) {
+branch  0 taken 0%
+branch  1 taken 100%
+    #####:   56:        printf("Playing Card Failed");
+    #####:   57:        pass = 0;
+    #####:   58:      };
+        -:   59:
+     2000:   60:      if (testState.numActions != G.numActions+addedActions){
+branch  0 taken 0%
+branch  1 taken 100%
+    #####:   61:        pass = 0;
+    #####:   62:        printf("Action Count: %d, Expected: %d \n", testState.numActions, G.numActions+addedActions);
+    #####:   63:      }
+        -:   64:
+     2000:   65:      if (testState.handCount[thisPlayer] != G.handCount[thisPlayer]+addedCards-discard){
+branch  0 taken 0%
+branch  1 taken 100%
+    #####:   66:        pass = 0;
+    #####:   67:        printf("Hand Count: %d, Expected: %d \n", testState.handCount[thisPlayer], G.handCount[thisPlayer]+addedCards-discard);
+    #####:   68:      }
+        -:   69:
+     2000:   70:      totalCards = G.deckCount[thisPlayer] + G.discardCount[thisPlayer];
+     2000:   71:      expectedCards = testState.deckCount[thisPlayer] + testState.discardCount[thisPlayer];
+     2000:   72:      if (expectedCards != totalCards - addedCards) {
+branch  0 taken 0%
+branch  1 taken 100%
+    #####:   73:        pass = 0;
+    #####:   74:        printf("Total Cards: %d, Expected: %d \n", expectedCards, totalCards-addedCards);
+    #####:   75:      };
+     2000:   76:    }
+        -:   77:    //End For Loop and Return Results
+        2:   78:    if (pass) {
+branch  0 taken 100%
+branch  1 taken 0%
+        2:   79:        printf(">>>>>TEST SUCCESSFULLY COMPLETED <<<<<\n");
+        2:   80:    } else{
+    #####:   81:        printf(">>>>>TEST FAILED<<<<<\n");
+        -:   82:    }
+        2:   83:    printf("\n>>>>> Random Card Test Complete - Village <<<<<\n\n");
+        2:   84:    return 0;
+        -:   85:};
